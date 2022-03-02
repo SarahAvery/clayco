@@ -19,7 +19,7 @@ const Confirmation = ({
 
   const onBack = (e: any) => {
     e.preventDefault();
-    onStepChange(1);
+    onStepChange(2);
   };
 
   return (

@@ -20,6 +20,7 @@ const CartStyled = styled.div`
     display: flex;
     justify-content: flex-end;
   }
+
   .step-btn {
     padding: 15px 32px;
     min-width: auto;
@@ -29,21 +30,24 @@ const CartStyled = styled.div`
     font-size: 16px;
     border-radius: 3px;
     color: #ffffff;
-    border-style: none;
+    border: 1px solid #181818;
+    cursor: pointer;
+    color: #181818;
   }
 
   .next {
-    background-color: #45a049;
+    /* background-color: #45a049; */
+    background-color: rgb(217, 204, 184);
     margin-left: 30%;
 
     &:hover {
-      background-color: #3e9142;
+      /* background-color: #3e9142; */
+      background-color: rgb(216, 197, 169);
     }
   }
 
   .back {
     background-color: #f5a53c;
-    border: 1px solid #965f17;
 
     &:hover {
       background-color: #eb9729;
@@ -229,6 +233,8 @@ const CartStyled = styled.div`
 
     .billing-info {
       width: 100%;
+      border: 1px solid lightgrey;
+      border-top: none;
 
       div {
         padding: 8px 16px;
@@ -242,7 +248,8 @@ const CartStyled = styled.div`
 
     .subtotal {
       margin: 0 auto;
-      border-top: 1px solid lightgrey;
+      border: 1px solid lightgrey;
+      border-top: none;
 
       .sub-container {
         margin: 0 auto;
@@ -258,6 +265,9 @@ const CartStyled = styled.div`
           }
         }
       }
+    }
+    .button-nav-container {
+      justify-content: flex-start;
     }
   }
 

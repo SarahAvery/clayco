@@ -1,6 +1,5 @@
-import e from "express";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Product from "../Product";
 import { ProductType } from "./Cart";
 

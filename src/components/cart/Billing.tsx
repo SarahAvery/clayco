@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faAddressCard, faInstitution, faCreditCard } from "@fortawesome/free-solid-svg-icons";
@@ -31,14 +31,25 @@ const Billing = ({
   const [next, setNext] = useState(false);
   const [empty, setEmpty] = useState<boolean>();
 
-  // if no value - isEmpty is true
+  console.log(values);
+
+  // if value is "" || null - isEmpty is true
+  // if all values & no empty, setNext false (disabled=false)
   useEffect(() => {
-    for (const [key, value] of Object.entries(values)) {
-      if (value === null || value === "") {
-        setEmpty(true);
-      } else setEmpty(false);
+    const valuesArr = Object.values(values);
+    function isEmpty(arr: Array<String>) {
+      for (let i of arr) {
+        if (i === "" || i === null) {
+          setEmpty(true);
+          break;
+        } else setEmpty(false);
+      }
     }
-    Object.keys(values).length >= 11 && empty === false ? setNext(false) : setNext(true);
+    isEmpty(valuesArr);
+
+    if (Object.keys(values).length >= 11 && empty === false) {
+      setNext(false);
+    } else setNext(true);
   }, [empty, values]);
 
   const onNext = (e: any) => {
