@@ -5,10 +5,11 @@ type ProductProps = {
   title: string;
   price: number;
   description: string;
+  image?: string;
   onChange: (id: number, quantity: number) => any;
 };
 
-const Product = ({ id, title, price, description, onChange }: ProductProps) => {
+const Product = ({ id, title, price, description, image, onChange }: ProductProps) => {
   const [quantity, updateQuantity] = useState(0);
 
   const onQuantityChange = useCallback(
@@ -34,7 +35,7 @@ const Product = ({ id, title, price, description, onChange }: ProductProps) => {
   return (
     <div className="product-container">
       <div className="images">
-        <img src="./img/so-white.png" alt="" />
+        <img src={image} alt="" />
       </div>
       <div>
         <label>

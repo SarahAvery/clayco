@@ -1,3 +1,5 @@
+import e from "express";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "../Product";
 import { ProductType } from "./Cart";
@@ -6,18 +8,34 @@ const CartOrder = ({
   subtotal,
   calculateCartTotal,
   products,
+  onStepChange,
 }: {
   subtotal: number;
   calculateCartTotal: (id: number, quantity: number) => void;
   products: ProductType[];
+  onStepChange: (step: number) => void;
 }) => {
+  const internationalNumberFormat = new Intl.NumberFormat("en-CA");
+  const formatSubtotal = internationalNumberFormat.format(subtotal);
+
+  const [next, setNext] = useState(false);
+
+  useEffect(() => {
+    subtotal > 0 ? setNext(false) : setNext(true);
+  }, [subtotal]);
+
+  const onNext = (e: any) => {
+    e.preventDefault();
+    onStepChange(2);
+  };
+
   return (
     <>
       <h1>Order</h1>
       <div className="container">
         <div>
           <form>
-            {products.map(({ id, title, price, description }) => (
+            {products.map(({ id, title, price, description, image }) => (
               <Product
                 key={id}
                 id={id}
@@ -25,6 +43,7 @@ const CartOrder = ({
                 price={price}
                 description={description}
                 onChange={calculateCartTotal}
+                image={image}
               />
             ))}
           </form>
@@ -32,22 +51,13 @@ const CartOrder = ({
         <div className="subtotal-container">
           <div>
             <p>Subtotal:</p>
-            <p>${subtotal}</p>
+            <p>${formatSubtotal}</p>
           </div>
         </div>
         <div className="button-nav-container">
-          {/* <Link to={"/cart"} className="nav-btn back">
-            Back
-          </Link> */}
-          {subtotal > 0 ? (
-            <Link to={"/cart/customer-information"} className="nav-btn next">
-              Next
-            </Link>
-          ) : (
-            <Link to={"/cart"} className="nav-btn next disabled">
-              Next
-            </Link>
-          )}
+          <button type="button" className="next step-btn" disabled={next} onClick={onNext}>
+            Next
+          </button>
         </div>
       </div>
     </>

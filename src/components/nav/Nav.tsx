@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import NavStyled from "./styles/Nav";
+import NavStyled from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 

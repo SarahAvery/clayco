@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faAddressCard, faInstitution, faCreditCard } from "@fortawesome/free-solid-svg-icons";
@@ -22,10 +22,35 @@ const options = [
 const Billing = ({
   onValueChange,
   values,
+  onStepChange,
 }: {
   onValueChange: (key: string, value: string) => void;
   values: { [key: string]: any };
+  onStepChange: (step: number) => void;
 }) => {
+  const [next, setNext] = useState(false);
+  const [empty, setEmpty] = useState<boolean>();
+
+  // if no value - isEmpty is true
+  useEffect(() => {
+    for (const [key, value] of Object.entries(values)) {
+      if (value === null || value === "") {
+        setEmpty(true);
+      } else setEmpty(false);
+    }
+    Object.keys(values).length >= 11 && empty === false ? setNext(false) : setNext(true);
+  }, [empty, values]);
+
+  const onNext = (e: any) => {
+    e.preventDefault();
+    onStepChange(3);
+  };
+
+  const onBack = (e: any) => {
+    e.preventDefault();
+    onStepChange(1);
+  };
+
   return (
     <>
       <h1>Billing</h1>
@@ -102,6 +127,7 @@ const Billing = ({
                             defaultValue={values.postal}
                             onChange={(e) => onValueChange("postal", e.target.value)}
                             placeholder="x8x 8x8"
+                            required
                           />
                         </label>
                       </div>
@@ -114,39 +140,78 @@ const Billing = ({
                     </h3>
                     <label>
                       Name on Card
-                      <input type="text" id="cname" name="cardname" placeholder="John More Doe" />
+                      <input
+                        type="text"
+                        defaultValue={values.cardname}
+                        name="cardname"
+                        placeholder="John More Doe"
+                        onChange={(e) => onValueChange("cardname", e.target.value)}
+                        required
+                      />
                     </label>
                     <label>
                       Credit card number
-                      <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" />
+                      <input
+                        type="text"
+                        defaultValue={values.cardnumber}
+                        name="cardnumber"
+                        placeholder="1111-2222-3333-4444"
+                        onChange={(e) => onValueChange("cardnumber", e.target.value)}
+                        required
+                      />
                     </label>
                     <label>
                       Exp Month
-                      <input type="text" id="expmonth" name="expmonth" placeholder="September" />
+                      <input
+                        type="text"
+                        defaultValue={values.expmonth}
+                        name="expmonth"
+                        placeholder="September"
+                        onChange={(e) => onValueChange("expmonth", e.target.value)}
+                        required
+                      />
                     </label>
                     <div className="row">
                       <div className="col-50">
                         <label>
                           Exp Year
-                          <input type="text" id="expyear" name="expyear" placeholder="2018" />
+                          <input
+                            type="text"
+                            defaultValue={values.expyear}
+                            name="expyear"
+                            placeholder="2018"
+                            onChange={(e) => onValueChange("expyear", e.target.value)}
+                            required
+                          />
                         </label>
                       </div>
                       <div className="col-50">
                         <label>
                           CVV
-                          <input type="text" id="cvv" name="cvv" placeholder="352" />
+                          <input
+                            type="text"
+                            defaultValue={values.cvv}
+                            name="cvv"
+                            placeholder="352"
+                            onChange={(e) => onValueChange("cvv", e.target.value)}
+                            required
+                          />
                         </label>
                       </div>
                     </div>
                   </div>
                 </div>
-                <label>
-                  <input type="checkbox" name="sameadr" /> Shipping address same as billing
-                </label>
-                {/* <input type="submit" value="Continue to checkout" className="btn" /> */}
               </form>
             </div>
           </div>
+        </div>
+        <div className="button-nav-container">
+          <button type="button" className="back step-btn" onClick={onBack}>
+            Back
+          </button>
+          <button type="button" className="next step-btn" disabled={next} onClick={onNext}>
+            Continue to checkout
+          </button>
         </div>
       </div>
     </>

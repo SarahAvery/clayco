@@ -1,9 +1,8 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./components/home/Home";
 import { Route, Routes } from "react-router";
 import Cart from "./components/cart/Cart";
-import { Link } from "react-router-dom";
-import Nav from "./components/Nav";
+import Nav from "./components/nav/Nav";
 
 function App() {
   return (

@@ -20,27 +20,37 @@ const CartStyled = styled.div`
     display: flex;
     justify-content: flex-end;
   }
-  .nav-btn {
+  .step-btn {
     padding: 15px 32px;
-    width: 35%;
+    min-width: auto;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     border-radius: 3px;
     color: #ffffff;
+    border-style: none;
   }
 
   .next {
-    background-color: #4b834b;
+    background-color: #45a049;
     margin-left: 30%;
+
+    &:hover {
+      background-color: #3e9142;
+    }
   }
 
   .back {
-    background-color: orange;
+    background-color: #f5a53c;
+    border: 1px solid #965f17;
+
+    &:hover {
+      background-color: #eb9729;
+    }
   }
 
-  .disabled {
+  button.step-btn:disabled {
     background-color: #9e9d9d;
   }
 
@@ -55,9 +65,7 @@ const CartStyled = styled.div`
     border: 1px solid lightgrey;
     border-top: none;
     display: flex;
-    padding-right: 24px;
-    position: relative;
-    right: 0;
+    justify-content: end;
     padding: 20px 0;
 
     div {
@@ -76,17 +84,17 @@ const CartStyled = styled.div`
   }
   /* order - Product */
 
+  img {
+    width: 80px;
+    height: 80px;
+    border: 1px solid lightgrey;
+  }
+
   .product-container {
     display: flex;
     border: 1px solid lightgrey;
     align-items: center;
     padding: 8px;
-
-    img {
-      width: 80px;
-      height: 80px;
-      border: 1px solid black;
-    }
 
     label {
       width: 100%;
@@ -188,22 +196,6 @@ const CartStyled = styled.div`
     padding: 7px 0;
     font-size: 24px;
   }
-
-  /* .btn {
-    background-color: #04aa6d;
-    color: white;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    width: 100%;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 17px;
-  }
-
-  .btn:hover {
-    background-color: #45a049;
-  } */
 
   span.price {
     float: right;

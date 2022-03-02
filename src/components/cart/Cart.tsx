@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useRef } from "react";
+// import { useEffect } from "react";
+// import { useRef } from "react";
 import { useState } from "react";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+// import { Link, Route, Routes, useLocation } from "react-router-dom";
 import CartStyled from "./Styles";
 import Billing from "./Billing";
 import CartOrder from "./CartOrder";
@@ -12,6 +12,7 @@ export type ProductType = {
   title: string;
   price: number;
   description: string;
+  image?: string;
 };
 
 const products: ProductType[] = [
@@ -21,6 +22,7 @@ const products: ProductType[] = [
     price: 99,
     description:
       "Two hour class with a group up to 10 people for more individual learning.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    image: "./img/mug.jpeg",
   },
   {
     id: 2,
@@ -28,6 +30,7 @@ const products: ProductType[] = [
     price: 200,
     description:
       "Three hour class with a group up to 20 people.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    image: "./img/pink-bowl.jpg",
   },
   {
     id: 3,
@@ -35,12 +38,14 @@ const products: ProductType[] = [
     price: 300,
     description:
       "Four class with advanced technics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    image: "./img/geo-vase.jpg",
   },
 ];
 
 type CartItem = { id: number; title: string; price: number; description: string; quantity: number };
 
 export default function Cart() {
+  const [step, setStep] = useState(1);
   const [subtotal, updateSubtotal] = useState(0);
   const [cart, updateCart] = useState<Array<CartItem>>([]);
 
@@ -69,8 +74,6 @@ export default function Cart() {
 
   // contact form
 
-  const [errors, setErrors] = useState({});
-
   const [values, setValues] = useState({});
 
   const onValueChange = (key: string, value: string) => {
@@ -79,20 +82,33 @@ export default function Cart() {
 
   // back and next
 
-  const pages = useRef(["/cart", "/cart/customer-information", "/cart/confirmation"]);
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
-  const location = useLocation();
-  // const history = useRef<string[]>([]);
+  // const pages = useRef(["/cart", "/cart/customer-information", "/cart/confirmation"]);
+  // const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  // const location = useLocation();
 
-  useEffect(() => {
-    const pageIndex = pages.current.findIndex((page) => page === location.pathname);
+  // useEffect(() => {
+  //   const pageIndex = pages.current.findIndex((page) => page === location.pathname);
 
-    setCurrentPageIndex(pageIndex);
-  }, [location]);
+  //   setCurrentPageIndex(pageIndex);
+  // }, [location]);
+
+  const onStepChange = (step: number) => {
+    setStep(step);
+  };
 
   return (
     <CartStyled>
-      <Routes>
+      {step === 1 && (
+        <CartOrder
+          subtotal={subtotal}
+          calculateCartTotal={calculateCartTotal}
+          products={products}
+          onStepChange={onStepChange}
+        />
+      )}
+      {step === 2 && <Billing onValueChange={onValueChange} values={values} onStepChange={onStepChange} />}
+      {step === 3 && <Confirmation values={values} cart={cart} subtotal={subtotal} onStepChange={onStepChange} />}
+      {/* <Routes>
         <Route
           index
           element={<CartOrder subtotal={subtotal} calculateCartTotal={calculateCartTotal} products={products} />}
@@ -111,7 +127,7 @@ export default function Cart() {
             Next
           </Link>
         )}
-      </div>
+      </div> */}
     </CartStyled>
   );
 }
