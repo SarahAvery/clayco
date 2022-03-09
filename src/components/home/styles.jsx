@@ -8,6 +8,7 @@ const HomeStyled = styled.div`
   img {
     opacity: 0.8;
     border-radius: 3px;
+    width: 100%;
   }
 `;
 

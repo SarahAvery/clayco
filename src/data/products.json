@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Beginner Class",
+    "price": 99,
+    "excerpt": "Two hour class with a group up to 10 people for more individual learning.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "description": "Two hour class with a group up to 10 people for more individual learning.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "image": "./img/mug.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Intermediate Class",
+    "price": 200,
+    "excerpt": "Three hour class with a group up to 20 people.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "description": "Three hour class with a group up to 20 people.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "image": "./img/pink-bowl.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Master Class",
+    "price": 300,
+    "excerpt": "Four class with advanced technics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "description": "Four class with advanced technics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "image": "./img/geo-vase.jpg"
+  }
+]

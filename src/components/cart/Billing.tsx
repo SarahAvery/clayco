@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faAddressCard, faInstitution, faCreditCard } from "@fortawesome/free-solid-svg-icons";
+import { isEmpty } from "lodash";
 
 const options = [
   { value: "AB", label: "AB" },
@@ -22,35 +23,38 @@ const options = [
 const Billing = ({
   onValueChange,
   values,
+  errors,
+  touched,
+  onInputBlur,
   onStepChange,
 }: {
   onValueChange: (key: string, value: string) => void;
   values: { [key: string]: any };
+  errors: { [key: string]: string[] };
+  touched: { [key: string]: boolean };
+  onInputBlur: (key: string) => void;
   onStepChange: (step: number) => void;
 }) => {
-  const [next, setNext] = useState(false);
-  const [empty, setEmpty] = useState<boolean>();
+  const [next, setNext] = useState(true);
+  const [empty, setEmpty] = useState<boolean>(false);
 
-  console.log(values);
-
-  // if value is "" || null - isEmpty is true
-  // if all values & no empty, setNext false (disabled=false)
+  // if any Errors - setEmpty to false
+  // if all values & empty is true, setNext false (disabled=false)
   useEffect(() => {
-    const valuesArr = Object.values(values);
-    function isEmpty(arr: Array<String>) {
-      for (let i of arr) {
-        if (i === "" || i === null) {
-          setEmpty(true);
+    function isEmpty(errorsArr: any) {
+      for (const key in errorsArr) {
+        if (errorsArr[key].length) {
+          setEmpty(false);
           break;
-        } else setEmpty(false);
+        } else setEmpty(true);
       }
     }
-    isEmpty(valuesArr);
-
-    if (Object.keys(values).length >= 11 && empty === false) {
+    const valueLength = Object.keys(values).length;
+    if (valueLength === 11 && empty === true) {
       setNext(false);
     } else setNext(true);
-  }, [empty, values]);
+    isEmpty(errors);
+  }, [empty, errors, values]);
 
   const onNext = (e: any) => {
     e.preventDefault();
@@ -80,9 +84,13 @@ const Billing = ({
                         type="text"
                         defaultValue={values.fullName}
                         onChange={(e) => onValueChange("fullName", e.target.value)}
+                        onBlur={() => onInputBlur("fullName")}
                         required
                       />
                     </label>
+                    <div className="input-error">
+                      {touched.fullName && errors.fullName?.map((error: string) => <span key={error}>{error}</span>)}
+                    </div>
                     <label>
                       <FontAwesomeIcon icon={faEnvelope} />
                       Email
@@ -90,18 +98,26 @@ const Billing = ({
                         type="email"
                         defaultValue={values.email}
                         onChange={(e) => onValueChange("email", e.target.value)}
+                        onBlur={() => onInputBlur("email")}
                         required
                       />
                     </label>
+                    <div className="input-error">
+                      {touched.email && errors.email?.map((error: string) => <span key={error}>{error}</span>)}
+                    </div>
                     <label>
                       <FontAwesomeIcon icon={faAddressCard} /> Address
                       <input
                         type="text"
                         defaultValue={values.address}
                         onChange={(e) => onValueChange("address", e.target.value)}
+                        onBlur={() => onInputBlur("address")}
                         required
                       />
                     </label>
+                    <div className="input-error">
+                      {touched.address && errors.address?.map((error: string) => <span key={error}>{error}</span>)}
+                    </div>
                     <label>
                       <FontAwesomeIcon icon={faInstitution} />
                       City
@@ -109,9 +125,13 @@ const Billing = ({
                         type="text"
                         defaultValue={values.city}
                         onChange={(e) => onValueChange("city", e.target.value)}
+                        onBlur={() => onInputBlur("city")}
                         required
                       />
                     </label>
+                    <div className="input-error">
+                      {touched.city && errors.city?.map((error: string) => <span key={error}>{error}</span>)}
+                    </div>
 
                     <div className="row">
                       <div className="col-50">
@@ -119,16 +139,15 @@ const Billing = ({
                           Prov:
                           <Select
                             options={options}
-                            defaultValue={
-                              (values.prov && {
-                                label: values.prov.label,
-                                value: values.prov.value,
-                              }) || { label: "Please select", value: "" }
-                            }
-                            onChange={(value: any) => onValueChange("prov", value)}
+                            defaultValue={options.find((key) => key.value === values.prov)}
+                            onChange={(value: any) => onValueChange("prov", value?.value)}
                             className="select"
+                            onBlur={() => onInputBlur("prov")}
                           />
                         </label>
+                        <div className="input-error prov-error">
+                          {touched.prov && !values.prov && <span>* Prov is required</span>}
+                        </div>
                       </div>
                       <div className="col-50">
                         <label>
@@ -137,10 +156,14 @@ const Billing = ({
                             type="text"
                             defaultValue={values.postal}
                             onChange={(e) => onValueChange("postal", e.target.value)}
+                            onBlur={() => onInputBlur("postal")}
                             placeholder="x8x 8x8"
                             required
                           />
                         </label>
+                        <div className="input-error">
+                          {touched.postal && errors.postal?.map((error: string) => <span key={error}>{error}</span>)}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -157,9 +180,13 @@ const Billing = ({
                         name="cardname"
                         placeholder="John More Doe"
                         onChange={(e) => onValueChange("cardname", e.target.value)}
+                        onBlur={() => onInputBlur("cardname")}
                         required
                       />
                     </label>
+                    <div className="input-error">
+                      {touched.cardname && errors.cardname?.map((error: string) => <span key={error}>{error}</span>)}
+                    </div>
                     <label>
                       Credit card number
                       <input
@@ -168,21 +195,48 @@ const Billing = ({
                         name="cardnumber"
                         placeholder="1111-2222-3333-4444"
                         onChange={(e) => onValueChange("cardnumber", e.target.value)}
+                        onBlur={() => onInputBlur("cardnumber")}
                         required
                       />
                     </label>
-                    <label>
-                      Exp Month
-                      <input
-                        type="text"
-                        defaultValue={values.expmonth}
-                        name="expmonth"
-                        placeholder="September"
-                        onChange={(e) => onValueChange("expmonth", e.target.value)}
-                        required
-                      />
-                    </label>
+                    <div className="input-error">
+                      {touched.cardnumber &&
+                        errors.cardnumber?.map((error: string) => <span key={error}>{error}</span>)}
+                    </div>
                     <div className="row">
+                      <div className="col-50">
+                        <label>
+                          Exp Month
+                          <input
+                            type="text"
+                            defaultValue={values.expmonth}
+                            name="expmonth"
+                            placeholder="03"
+                            onChange={(e) => onValueChange("expmonth", e.target.value)}
+                            onBlur={() => onInputBlur("expmonth")}
+                            required
+                          />
+                        </label>
+                        <div className="input-error">
+                          {touched.expmonth &&
+                            errors.expmonth?.map((error: string) => <span key={error}>{error}</span>)}
+                        </div>
+                        <label>
+                          CVV
+                          <input
+                            type="text"
+                            defaultValue={values.cvv}
+                            name="cvv"
+                            placeholder="352"
+                            onChange={(e) => onValueChange("cvv", e.target.value)}
+                            onBlur={() => onInputBlur("cvv")}
+                            required
+                          />
+                        </label>
+                        <div className="input-error">
+                          {touched.cvv && errors.cvv?.map((error: string) => <span key={error}>{error}</span>)}
+                        </div>
+                      </div>
                       <div className="col-50">
                         <label>
                           Exp Year
@@ -192,22 +246,13 @@ const Billing = ({
                             name="expyear"
                             placeholder="2018"
                             onChange={(e) => onValueChange("expyear", e.target.value)}
+                            onBlur={() => onInputBlur("expyear")}
                             required
                           />
                         </label>
-                      </div>
-                      <div className="col-50">
-                        <label>
-                          CVV
-                          <input
-                            type="text"
-                            defaultValue={values.cvv}
-                            name="cvv"
-                            placeholder="352"
-                            onChange={(e) => onValueChange("cvv", e.target.value)}
-                            required
-                          />
-                        </label>
+                        <div className="input-error">
+                          {touched.expyear && errors.expyear?.map((error: string) => <span key={error}>{error}</span>)}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -217,11 +262,11 @@ const Billing = ({
           </div>
         </div>
         <div className="button-nav-container">
-          <button type="button" className="back step-btn" onClick={onBack}>
-            Back
-          </button>
           <button type="button" className="next step-btn" disabled={next} onClick={onNext}>
             Continue to checkout
+          </button>
+          <button type="button" className="back step-btn" onClick={onBack}>
+            Back
           </button>
         </div>
       </div>

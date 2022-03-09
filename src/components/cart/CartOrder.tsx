@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import Product from "../Product";
-import { ProductType } from "./Cart";
+import { CartItem } from "./Cart";
 
 const CartOrder = ({
   subtotal,
@@ -11,7 +11,7 @@ const CartOrder = ({
 }: {
   subtotal: number;
   calculateCartTotal: (id: number, quantity: number) => void;
-  products: ProductType[];
+  products: CartItem[];
   onStepChange: (step: number) => void;
 }) => {
   const internationalNumberFormat = new Intl.NumberFormat("en-CA");
@@ -34,16 +34,8 @@ const CartOrder = ({
       <div className="container">
         <div>
           <form>
-            {products.map(({ id, title, price, description, image }) => (
-              <Product
-                key={id}
-                id={id}
-                title={title}
-                price={price}
-                description={description}
-                onChange={calculateCartTotal}
-                image={image}
-              />
+            {products.map(({ id, ...props }) => (
+              <Product key={id} id={id} onChange={calculateCartTotal} {...props} />
             ))}
           </form>
         </div>

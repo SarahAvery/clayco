@@ -1,21 +1,17 @@
 import { useCallback, useState } from "react";
+import { CartItem } from "./cart/Cart";
 
-type ProductProps = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image?: string;
+type ProductProps = CartItem & {
   onChange: (id: number, quantity: number) => any;
 };
 
-const Product = ({ id, title, price, description, image, onChange }: ProductProps) => {
-  const [quantity, updateQuantity] = useState(0);
+const Product = ({ id, title, price, excerpt, image, quantity: defaultQuantity, onChange }: ProductProps) => {
+  const [quantity, updateQuantity] = useState<string>(defaultQuantity?.toString() || "0");
 
   const onQuantityChange = useCallback(
-    (value: number) => {
+    (value: string) => {
       updateQuantity(value);
-      onChange(id, value);
+      onChange(id, Number(value));
     },
     [id, onChange]
   );
@@ -24,12 +20,19 @@ const Product = ({ id, title, price, description, image, onChange }: ProductProp
     (event, operator) => {
       event.preventDefault();
       if (operator === "decrement") {
-        onQuantityChange(quantity > 0 ? quantity - 1 : quantity);
+        onQuantityChange(Number(quantity) === 0 ? "0" : String(Number(quantity) - 1));
         return;
       }
-      onQuantityChange(quantity + 1);
+      onQuantityChange(Number(quantity) === 0 ? "1" : String(Number(quantity) + 1));
     },
     [onQuantityChange, quantity]
+  );
+
+  const onQuantityBlur = useCallback(
+    (value) => {
+      onQuantityChange(Number(value) === 0 ? "0" : String(Number(value)));
+    },
+    [onQuantityChange]
   );
 
   return (
@@ -44,9 +47,9 @@ const Product = ({ id, title, price, description, image, onChange }: ProductProp
           </p>
         </label>
         <div className="product-info">
-          <p className="description">{description}</p>
+          <p className="description">{excerpt}</p>
           <div className="quantity">
-            <button onClick={(event) => onClick(event, "decrement")} disabled={quantity === 0}>
+            <button onClick={(event) => onClick(event, "decrement")} disabled={Number(quantity) === 0}>
               -
             </button>
             <input
@@ -54,9 +57,10 @@ const Product = ({ id, title, price, description, image, onChange }: ProductProp
               min="0"
               max="10"
               value={quantity}
-              onChange={(event) => onQuantityChange(Number(event.target.value))}
+              onChange={(event) => onQuantityChange(event.target.value)}
+              onBlur={(event) => onQuantityBlur(event.target.value)}
             ></input>
-            <button onClick={(event) => onClick(event, "increment")} disabled={quantity === 10}>
+            <button onClick={(event) => onClick(event, "increment")} disabled={Number(quantity) === 10}>
               +
             </button>
           </div>
