@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 const FooterStyled = styled.div`
-  width: 100%;
-  margin-top: 40px;
   border-top: 1px solid lightgray;
-
   max-height: 200px;
   padding: 20px 0;
-  bottom: 0;
+
+  /* position: absolute;
+  bottom: 0; */
+  width: 100%;
+  max-width: 1200px;
 
   .logo {
     font-size: 12px;

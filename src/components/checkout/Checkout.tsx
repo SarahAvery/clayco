@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCompass } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import CheckoutStyled from "./Styles";
 
 const Checkout = () => {
   return (
-    <div className="modal">
-      <div className="checkout-modal">
+    <CheckoutStyled>
+      <div className="container">
         <div className="confirmed">
           <p>Confirmed</p>
         </div>
@@ -18,7 +19,7 @@ const Checkout = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </CheckoutStyled>
   );
 };
 

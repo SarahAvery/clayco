@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 const ClassStyled = styled.div`
   width: 80%;
-  margin: 0 auto;
-  margin-top: 40px;
+  margin: 40px auto;
   background-color: rgba(250, 250, 250, 0.8);
   border-radius: 3px;
   border: 1px solid lightgray;
+  flex: 1;
 
   .class-container {
     border-bottom: 1px solid lightgray;
@@ -17,7 +17,9 @@ const ClassStyled = styled.div`
   .product-title {
     font-size: 20px;
     font-weight: bold;
+    padding-bottom: 10px;
   }
+
   .product-title,
   .description {
     margin-bottom: 10px;

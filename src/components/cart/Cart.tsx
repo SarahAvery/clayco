@@ -31,8 +31,6 @@ const currentTime = new Date();
 const month = currentTime.getMonth() + 1;
 const year = currentTime.getFullYear();
 
-console.log(year, month);
-
 type Validator = { validate: (value: string) => boolean; error: string };
 
 const validationSchema: Record<string, Validator[]> = {
@@ -174,25 +172,27 @@ export default function Cart() {
 
   return (
     <CartStyled>
-      {step === 1 && (
-        <CartOrder
-          subtotal={subtotal}
-          calculateCartTotal={calculateCartTotal}
-          products={cart}
-          onStepChange={onStepChange}
-        />
-      )}
-      {step === 2 && (
-        <Billing
-          onValueChange={onValueChange}
-          values={values}
-          errors={formErrors}
-          touched={touched}
-          onInputBlur={onInputBlur}
-          onStepChange={onStepChange}
-        />
-      )}
-      {step === 3 && <Confirmation values={values} cart={cart} subtotal={subtotal} onStepChange={onStepChange} />}
+      <div className="cart-container">
+        {step === 1 && (
+          <CartOrder
+            subtotal={subtotal}
+            calculateCartTotal={calculateCartTotal}
+            products={cart}
+            onStepChange={onStepChange}
+          />
+        )}
+        {step === 2 && (
+          <Billing
+            onValueChange={onValueChange}
+            values={values}
+            errors={formErrors}
+            touched={touched}
+            onInputBlur={onInputBlur}
+            onStepChange={onStepChange}
+          />
+        )}
+        {step === 3 && <Confirmation values={values} cart={cart} subtotal={subtotal} onStepChange={onStepChange} />}
+      </div>
       {/* <Routes>
         <Route
           index

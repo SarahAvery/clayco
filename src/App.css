@@ -178,6 +178,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .visually-hidden {
@@ -196,26 +198,18 @@ html {
 }
 
 #root {
-  /* min-height: 100%; */
-  /* height: 100%; */
   min-height: 100vh;
 }
 
 .App {
-  /* min-height: 100%; */
-  /* height: 100%; */
   min-height: 100vh;
 }
 
 .wrapper {
-  /* min-height: 100%; */
-  /* height: 100%; */
   min-height: 100vh;
 }
 
 body {
-  /* min-height: 100%; */
-  /* max-height: 100%; */
   min-height: 100vh;
 }
 
@@ -232,4 +226,5 @@ body {
   cursor: pointer;
   color: #181818;
   transition: 200ms background-color ease-in-out;
+  cursor: pointer;
 }

@@ -3,24 +3,35 @@ import styled from "styled-components";
 const ContactStyled = styled.div`
   width: 80%;
   margin: 40px auto;
-  background-color: rgba(250, 250, 250, 0.8);
-  border-radius: 3px;
-  border: 1px solid lightgray;
-  padding: 16px;
-  min-height: 450px;
+  flex: 1;
+
+  .container {
+    min-height: 350px;
+
+    background-color: rgba(250, 250, 250, 0.8);
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    padding: 16px;
+    min-height: 450px;
+  }
+
+  .info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: center;
+    margin: 0 auto;
+    min-height: 300px;
+    align-items: center;
+    padding: 40px 0;
+  }
 
   h2 {
     font-size: 1.2rem;
     text-align: center;
     padding: 10px;
     text-decoration: underline;
-  }
-
-  .container {
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 100%;
   }
 
   p {
@@ -30,8 +41,9 @@ const ContactStyled = styled.div`
 
   .contact,
   .hours-container {
+    flex: 1;
     margin: 0 auto;
-    width: 40%;
+    /* width: 40%; */
     padding: 20px 0;
 
     span {
@@ -41,16 +53,10 @@ const ContactStyled = styled.div`
   }
 
   .hours-container {
-    border-top: 1px solid lightgray;
-
     .title {
       font-weight: bold;
       width: 100%;
       text-align: center;
-    }
-
-    .hours {
-      width: 90%;
     }
 
     .hours div {
@@ -61,6 +67,17 @@ const ContactStyled = styled.div`
     .days {
       font-weight: bold;
     }
+  }
+
+  .img-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    width: 80%;
+    border-radius: 3px;
   }
 `;
 

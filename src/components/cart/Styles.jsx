@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 const CartStyled = styled.div`
-  background-color: #fafafa;
-  border: 1px solid #747474;
-  max-width: 800px;
-  margin: 20px auto;
-  border-radius: 3px;
+  flex: 1;
+
+  .cart-container {
+    background-color: #fafafa;
+    border: 1px solid #747474;
+    max-width: 800px;
+    margin: 40px auto;
+    border-radius: 3px;
+  }
 
   h1 {
     border-bottom: 1px solid black;
@@ -38,14 +42,14 @@ const CartStyled = styled.div`
     }
   }
 
-  button.step-btn:disabled {
+  .step-btn:disabled {
     background-color: #b8b5b5;
-    opacity: 80%;
+    opacity: 60%;
+    cursor: not-allowed;
   }
 
   .container {
     background-color: #ffffff;
-    border: 1px solid lightgrey;
     border-radius: 3px;
     padding: 8px;
   }
@@ -215,7 +219,6 @@ const CartStyled = styled.div`
   .order-summary {
     margin: 0 auto;
     width: 80%;
-    border: 1px solid lightgrey;
 
     .bill-sub-container {
       display: flex;
@@ -301,91 +304,6 @@ const CartStyled = styled.div`
       width: 100%;
       margin-bottom: 8px;
       margin-top: 0;
-    }
-  }
-
-  /* CHECKEDOUT MODAL */
-  .modal {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.75);
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    z-index: 100;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 900px;
-    height: 600px;
-    max-width: 100%;
-    max-height: 100%;
-  }
-  .checkout-modal {
-    background: white;
-    /* border: 1px solid black; */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-
-    .confirmed {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 120px;
-
-      p {
-        font-weight: bolder;
-        font-size: 3rem;
-        text-shadow: 1px 1px 2px #000;
-        color: rgba(217, 204, 184, 8);
-      }
-    }
-
-    h2 {
-      padding: 10px 0;
-    }
-
-    p {
-      color: #747474;
-    }
-
-    .link-container {
-      margin-top: 20px;
-    }
-
-    .step-btn {
-      border: 2px solid rgba(217, 195, 184, 1);
-      padding: 8px 12px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-
-      .icon {
-        color: rgb(217, 195, 184);
-      }
-      p {
-        padding-left: 10px;
-        color: #3b3b3b;
-      }
-
-      &:hover {
-        background-color: rgba(217, 195, 184, 0.5);
-
-        .icon {
-          color: white;
-        }
-      }
     }
   }
 

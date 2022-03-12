@@ -1,19 +1,29 @@
 import styled from "styled-components";
 
 const AboutStyled = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 40px;
-  background-color: rgba(250, 250, 250, 0.8);
-  border-radius: 3px;
-  border: 1px solid lightgray;
-  padding: 16px;
+  /* width: 80%; */
+  /* margin: 40px auto; */
+  /* background-color: rgba(250, 250, 250, 0.8); */
+  /* border-radius: 3px; */
+  /* border: 1px solid lightgray; */
+  /* padding: 16px; */
+  flex: 1;
+
+  .container {
+    width: 80%;
+    margin: 40px auto;
+    background-color: rgba(250, 250, 250, 0.8);
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    padding: 16px;
+  }
 
   h2 {
     font-size: 1.2rem;
     text-align: center;
     padding: 10px;
     text-decoration: underline;
+    padding-bottom: 20px;
   }
 
   p {

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Checkout from "./Checkout";
+import { Link } from "react-router-dom";
 
 const Confirmation = ({
   values,
@@ -20,23 +19,15 @@ const Confirmation = ({
     return internationalNumberFormat.format(value);
   };
 
-  const [checkedout, setCheckedout] = useState(false);
-
   const onBack = (e: any) => {
     e.preventDefault();
     onStepChange(2);
-  };
-
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    setCheckedout(true);
   };
 
   const formatCard = `****-****-****-${values.cardnumber.substring(values.cardnumber.length - 4)}`;
 
   return (
     <>
-      {checkedout === true && <Checkout></Checkout>}
       <h1>Order Summary</h1>
       <div className="order-summary container">
         <div className="summary">
@@ -102,9 +93,9 @@ const Confirmation = ({
         </div>
 
         <div className="button-nav-container">
-          <button type="submit" className="next step-btn checkout" onClick={onSubmit}>
+          <Link to="/checkout" type="submit" className="next step-btn checkout">
             Checkout
-          </button>
+          </Link>
           <button type="button" className="back step-btn" onClick={onBack}>
             Back
           </button>
