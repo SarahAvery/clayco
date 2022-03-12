@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faAddressCard, faInstitution, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { isEmpty } from "lodash";
 
 const options = [
   { value: "AB", label: "AB" },

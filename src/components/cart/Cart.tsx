@@ -1,12 +1,9 @@
-// import { useEffect } from "react";
-// import { useRef } from "react";
 import { useState } from "react";
-// import { Link, Route, Routes, useLocation } from "react-router-dom";
 import CartStyled from "./Styles";
 import Billing from "./Billing";
 import CartOrder from "./CartOrder";
 import Confirmation from "./Confirmation";
-import { cloneDeep, values } from "lodash";
+import { cloneDeep } from "lodash";
 import productData from "../../data/products.json";
 
 export type ProductType = {
@@ -16,6 +13,7 @@ export type ProductType = {
   excerpt: string;
   description: string;
   image?: string;
+  images?: string[];
 };
 
 const products: ProductType[] = productData;
@@ -23,12 +21,17 @@ const products: ProductType[] = productData;
 const lettersOnly = new RegExp(/^[A-Za-z\s]+$/);
 const nameValid = new RegExp(/^[A-Za-z-\s]+$/);
 const emailValid = new RegExp(
-  /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+  /^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 );
 const addressValid = new RegExp(/^[A-Za-z0-9.#-\s]+$/);
 const postalValid = new RegExp(/[a-zA-Z][0-9][a-zA-Z](-| |)[0-9][a-zA-Z][0-9]/);
 const numOnly = new RegExp(/^[0-9]+$/);
 const creditNumValid = new RegExp(/^[0-9-\s]+$/);
+const currentTime = new Date();
+const month = currentTime.getMonth() + 1;
+const year = currentTime.getFullYear();
+
+console.log(year, month);
 
 type Validator = { validate: (value: string) => boolean; error: string };
 
@@ -83,13 +86,14 @@ const validationSchema: Record<string, Validator[]> = {
   ],
   expmonth: [
     {
-      validate: (value: string) => numOnly.test(value) && value.length === 2,
+      validate: (value: string) =>
+        numOnly.test(value) && value.length === 2 && Number(value) <= 12 && Number(value) >= month,
       error: "* Invalid month",
     },
   ],
   expyear: [
     {
-      validate: (value: string) => numOnly.test(value) && value.length === 4,
+      validate: (value: string) => numOnly.test(value) && value.length === 4 && Number(value) >= year,
       error: "* Invalid year",
     },
   ],
@@ -99,7 +103,6 @@ const validationSchema: Record<string, Validator[]> = {
       error: "* Invalid cvv",
     },
   ],
-  //  prov
 };
 
 export type CartItem = ProductType & { quantity?: number };

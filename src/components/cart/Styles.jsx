@@ -22,21 +22,6 @@ const CartStyled = styled.div`
     flex-direction: row-reverse;
   }
 
-  .step-btn {
-    padding: 15px 32px;
-    min-width: 160px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 3px;
-    color: #ffffff;
-    border: 1px solid #181818;
-    cursor: pointer;
-    color: #181818;
-    transition: 200ms background-color ease-in-out;
-  }
-
   .next {
     background-color: rgba(217, 195, 184, 0.6);
 
@@ -92,6 +77,7 @@ const CartStyled = styled.div`
     width: 80px;
     height: 80px;
     border: 1px solid lightgrey;
+    border-radius: 3px;
   }
 
   .product-container {

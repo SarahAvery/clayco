@@ -26,7 +26,7 @@ const Nav = () => {
       </div>
       <div>
         <Link to={"/cart"}>
-          <FontAwesomeIcon icon={faShoppingBasket} />
+          <FontAwesomeIcon icon={faShoppingBasket} className="cart-icon" />
         </Link>
       </div>
     </NavStyled>

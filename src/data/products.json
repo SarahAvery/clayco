@@ -4,23 +4,38 @@
     "title": "Beginner Class",
     "price": 99,
     "excerpt": "Two hour class with a group up to 10 people for more individual learning.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
-    "description": "Two hour class with a group up to 10 people for more individual learning.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
-    "image": "./img/mug.jpeg"
+    "description": "Two hour class with a group up to 10 people for more individual learning. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at convallis magna. Duis cursus lectus a quam maximus, eget hendrerit dui mattis. Vestibulum quis eleifend est, euismod bibendum mauris. Etiam sodales lobortis neque, ut posuere nibh luctus nec. Cras purus enim, semper sollicitudin aliquet non, placerat vitae odio. Donec gravida lectus nec ligula ullamcorper egestas. Donec facilisis porttitor neque, vel pulvinar massa pulvinar laoreet.",
+    "image": "./img/mug-2.jpg",
+    "images": ["./img/mug.jpeg", "./img/pink-bowl.jpg", "./img/kiln.jpg", "./img/mug-2.jpg", "./img/rainbow.jpg"]
   },
   {
     "id": 2,
     "title": "Intermediate Class",
     "price": 200,
-    "excerpt": "Three hour class with a group up to 20 people.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
-    "description": "Three hour class with a group up to 20 people.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
-    "image": "./img/pink-bowl.jpg"
+    "excerpt": "Three hour class with a group up to 20 people. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
+    "description": "Three hour class with a group up to 20 people. Sed faucibus pretium erat, quis tristique eros ultrices id. Morbi lacinia tortor ut neque mattis euismod. Sed ut quam ut quam sollicitudin pharetra. Pellentesque faucibus, dui ut blandit ultricies, neque arcu condimentum dolor, sit amet ultrices elit tortor eu lectus. Etiam ultrices ullamcorper sagittis.",
+    "image": "./img/full-moon-white-clay-vase.jpg",
+    "images": [
+      "./img/colorful-cups.jpg",
+      "./img/cup-on-shelf.jpg",
+      "./img/diamond-vase.jpeg",
+      "./img/full-moon-white-clay-vase.jpg",
+      "./img/pink-green-vases.jpg"
+    ]
   },
   {
     "id": 3,
     "title": "Master Class",
     "price": 300,
     "excerpt": "Four class with advanced technics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
-    "description": "Four class with advanced technics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales congue congue.",
-    "image": "./img/geo-vase.jpg"
+    "description": "Four class with advanced technics. Suspendisse aliquet tincidunt venenatis. Nam id sapien nec ipsum dignissim aliquam. Cras auctor felis ligula, sit amet imperdiet tellus vestibulum id. Suspendisse faucibus odio velit. Nunc rhoncus orci tellus, vitae ultrices erat volutpat quis. Quisque faucibus augue nec dolor blandit, quis condimentum ipsum molestie. Fusce maximus arcu vel odio maximus, imperdiet auctor augue sagittis. Suspendisse potenti. Proin hendrerit sagittis dapibus.",
+    "image": "./img/heads.jpg",
+    "images": [
+      "./img/holy-vase.jpeg",
+      "./img/body-vases.jpg",
+      "./img/geo-vase.jpg",
+      "./img/heads.jpg",
+      "./img/honey.jpg"
+    ]
   }
 ]

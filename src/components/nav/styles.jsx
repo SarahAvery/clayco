@@ -39,9 +39,9 @@ const NavStyled = styled.div`
     padding: 4px 0;
   }
 
-  /* @media (max-width: 800px) {
-    padding: 20px;
-  } */
+  .cart-icon {
+    font-size: 20px;
+  }
 `;
 
 export default NavStyled;

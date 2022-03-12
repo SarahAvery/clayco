@@ -41,17 +41,21 @@ const Confirmation = ({
       <div className="order-summary container">
         <div className="summary">
           <h2>Order</h2>
-          {cart.map(({ title, price, quantity, id, image }: EachItemType) => (
-            <div className="item" key={id}>
-              <img src={image} alt="" />
-              <p>{title}</p>
-              <div>
-                <p>
-                  {quantity} @ ${price}
-                </p>
-              </div>
-            </div>
-          ))}
+          {cart.map(({ title, price, quantity, id, image }: EachItemType) => {
+            if (quantity > 0) {
+              return (
+                <div className="item" key={id}>
+                  <img src={image} alt="" />
+                  <p>{title}</p>
+                  <div>
+                    <p>
+                      {quantity} x ${price}
+                    </p>
+                  </div>
+                </div>
+              );
+            } else return null;
+          })}
         </div>
         <div className="bill-sub-container">
           <div className="billing-info">
